@@ -1,0 +1,7 @@
+/api/__pycache__
+/database/__pycache__
+/models/__pycache__
+logs/plant_taxonomy_20260117_184929.log
+*.log
+/utils/__pycache__
+/gui/__pycache__
