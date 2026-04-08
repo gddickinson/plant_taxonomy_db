@@ -5,3 +5,6 @@ logs/plant_taxonomy_20260117_184929.log
 *.log
 /utils/__pycache__
 /gui/__pycache__
+api/.DS_Store
+utils/.DS_Store
+gui/.DS_Store
