@@ -274,3 +274,7 @@ This project is for scientific and educational use.
 
 - ITIS (Integrated Taxonomic Information System) for taxonomic data
 - USGS for maintaining the ITIS web services
+
+
+---
+*Built with AI assistance from [Claude (Anthropic)](https://claude.com/).*
