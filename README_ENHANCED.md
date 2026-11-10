@@ -361,7 +361,7 @@ python demo_enhanced.py
 
 ## License
 
-This project is for scientific and educational use.
+Released under the [MIT licence](LICENSE).
 
 ## Acknowledgments
 
