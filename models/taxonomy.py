@@ -148,12 +148,17 @@ class TaxonomicHierarchy:
 RANK_ORDER = [
     'Kingdom',
     'Subkingdom',
+    'Infrakingdom',  # ITIS ranks between kingdom and division
+    'Superdivision',
     'Division',
     'Phylum',  # Alternative to Division
     'Subdivision',
     'Subphylum',
+    'Infradivision',
+    'Superclass',
     'Class',
     'Subclass',
+    'Superorder',
     'Order',
     'Suborder',
     'Family',
@@ -167,7 +172,9 @@ RANK_ORDER = [
     'Species',
     'Subspecies',
     'Variety',
-    'Form'
+    'Subvariety',
+    'Form',
+    'Subform'
 ]
 
 

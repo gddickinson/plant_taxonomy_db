@@ -241,7 +241,7 @@ class ITISClient:
                 taxon_data = {}
                 
                 # Extract fields
-                for field in ['tsn', 'parentTsn', 'rankName', 'taxonName']:
+                for field in ['tsn', 'parentTsn', 'rankName', 'taxonName', 'author']:
                     elem = item.find(f'ax21:{field}', ns)
                     if elem is not None and elem.text:
                         taxon_data[field] = elem.text
@@ -252,6 +252,7 @@ class ITISClient:
                         rank=taxon_data['rankName'],
                         tsn=int(taxon_data.get('tsn', 0)) or None,
                         parent_tsn=int(taxon_data.get('parentTsn', 0)) or None,
+                        authorship=taxon_data.get('author'),
                         source='ITIS'
                     )
                     

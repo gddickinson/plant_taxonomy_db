@@ -1,0 +1,30 @@
+{
+  "root_name": "Pinales",
+  "root_tsn": 500028,
+  "subtree_taxa": 340,
+  "source": "ITIS (Integrated Taxonomic Information System), https://www.itis.gov",
+  "service": "https://www.itis.gov/ITISWebService/services/ITISService",
+  "downloaded": "2026-11-11",
+  "builder": "scripts/build_itis_subset.py",
+  "stats": {
+    "total_taxa": 348,
+    "by_rank": {
+      "Species": 231,
+      "Variety": 54,
+      "Genus": 44,
+      "Family": 6,
+      "Subspecies": 4,
+      "Class": 1,
+      "Division": 1,
+      "Infrakingdom": 1,
+      "Kingdom": 1,
+      "Order": 1,
+      "Subclass": 1,
+      "Subdivision": 1,
+      "Subkingdom": 1,
+      "Superdivision": 1
+    },
+    "total_common_names": 586,
+    "total_synonyms": 367
+  }
+}
