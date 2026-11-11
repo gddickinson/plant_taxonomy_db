@@ -129,6 +129,39 @@ lineage = db.get_lineage(tsn)
 db.close()
 ```
 
+## Web interface
+
+A browser front end for the database: a taxonomy tree from kingdom to species and varieties, search by scientific or
+common name with a rank filter, and a page per taxon with its lineage, classification, children, common names and
+synonyms.
+
+**Live site:** https://gddickinson.github.io/plant_taxonomy_db/ shows a subset built from ITIS with the repo's own
+client: the conifer order **Pinales** (all its families, genera, species, subspecies and varieties, plus the lineage up
+to Plantae), downloaded on 2026-11-11 (`data/pinales_itis.db`; see THIRD_PARTY.md). It is not the whole plant kingdom.
+
+| Home | Tree | Taxon | Search |
+|---|---|---|---|
+| ![Home](docs/img/home.png) | ![Tree](docs/img/tree.png) | ![Taxon page](docs/img/taxon.png) | ![Search](docs/img/search.png) |
+
+### Run the web app
+
+```bash
+pip install -r requirements-web.txt
+python run_web.py                              # http://127.0.0.1:8113 with the committed ITIS subset
+python run_web.py --db plants_populated.db     # browse any database built by the GUI, demo.py or populate_database.py
+```
+
+The API (`/api/meta`, `/api/tree`, `/api/taxa`, `/api/taxon/<id>`, `/api/search?q=&rank=`) calls the repo's
+`TaxonomyDatabase` queries (`get_lineage_by_id`, `get_children_by_taxon_data`, `search_by_name`, `get_statistics`) on a
+read-only connection; it never contacts ITIS or GBIF.
+
+- Rebuild the subset (needs internet): `python scripts/build_itis_subset.py [--name Pinales]`, then
+  `python scripts/make_search_fixture.py`.
+- Tests: `python -m pytest -q tests/test_web.py` (includes a check that the in-browser search gives the same results
+  as the Python search).
+- Static site: `python scripts/build_static.py` writes `site/`; `.github/workflows/pages.yml` publishes it on every
+  push to `main` (Settings → Pages → Source: GitHub Actions).
+
 ## Database Schema
 
 ### Tables

@@ -1,0 +1,32 @@
+/* Plant Taxonomy Database: needle green / cone amber / glacier teal accents and page styles on top of style.css. */
+:root { --accent:#7ee787; --accent2:#e3b341; --accent3:#56d4dd; --glow:rgba(126,231,135,.13); --bg:#050a08; --panel:#0b1410; }
+.mark { border-color:var(--accent); }
+main:focus, main:focus-visible { outline:none; }
+a.tile { color:var(--ink); } a.tile:hover { text-decoration:none; box-shadow:0 0 18px var(--glow); }
+.sci { font-style:italic; }
+.rank { font:11px var(--mono); text-transform:uppercase; letter-spacing:.08em; color:var(--accent2); margin-right:6px; }
+.auth { color:var(--mute); font-size:.92em; }
+.kv { display:grid; grid-template-columns:repeat(auto-fill,minmax(170px,1fr)); gap:10px; margin:16px 0; }
+.kv div { background:rgba(11,20,16,.85); border:1px solid var(--line); border-radius:4px; padding:10px 12px; }
+.kv b { display:block; overflow-wrap:anywhere; } .kv span { color:var(--mute); font-size:12px; }
+.lineage { display:flex; flex-wrap:wrap; gap:4px 6px; align-items:center; font-size:14px; margin:0 0 14px; }
+.lineage .sep { color:var(--mute); }
+/* tree */
+.tree, .tree ul { list-style:none; margin:0; padding:0; }
+.tree ul { padding-left:20px; border-left:1px dashed var(--line); margin-left:7px; }
+.tree li { margin:2px 0; }
+.tree summary { cursor:pointer; list-style:none; padding:2px 0; }
+.tree summary::-webkit-details-marker { display:none; }
+.tree summary::before { content:'▸'; display:inline-block; width:16px; color:var(--accent); transition:transform .1s; }
+.tree details[open] > summary::before { transform:rotate(90deg); }
+.tree .leaf { padding-left:16px; display:block; }
+.tree .n { font:12px var(--mono); color:var(--mute); margin-left:6px; }
+.tree .hit > a, .tree .hit > summary > a { background:color-mix(in srgb, var(--accent2) 22%, transparent); border-radius:3px; padding:0 3px; }
+/* rank bars */
+.bars { display:grid; grid-template-columns:max-content 1fr max-content; gap:6px 12px; align-items:center; font-size:14px; }
+.bars .bar { height:12px; background:linear-gradient(90deg, var(--accent), var(--accent3)); border-radius:2px; min-width:2px; }
+.bars a { color:var(--ink); }
+.filters { display:grid; grid-template-columns:2fr 1fr; gap:10px 14px; align-items:end; }
+.filters label { margin-top:0; }
+td .common { color:var(--mute); font-size:13px; }
+@media (max-width:760px) { .filters { grid-template-columns:1fr; } .tree ul { padding-left:12px; } }

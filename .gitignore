@@ -8,3 +8,8 @@ logs/plant_taxonomy_20260117_184929.log
 api/.DS_Store
 utils/.DS_Store
 gui/.DS_Store
+
+# web build output and caches
+/site/
+__pycache__/
+.pytest_cache/
