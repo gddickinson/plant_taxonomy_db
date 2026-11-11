@@ -191,7 +191,8 @@ class ITISClient:
             
             # Parse XML results
             ns = {'ax21': 'http://data.itis_service.itis.usgs.gov/xsd'}
-            for item in root.findall('.//ax21:scientificName', ns):
+            # Each hit is an <ax21:scientificNames> element (plural tag)
+            for item in root.findall('.//ax21:scientificNames', ns):
                 result = {}
                 
                 tsn_elem = item.find('ax21:tsn', ns)
@@ -287,6 +288,24 @@ class ITISClient:
             logger.error(f"Data parsing failed: {e}")
             raise
             
+    @staticmethod
+    def split_lineage(hierarchy: List[Taxon], tsn: int):
+        """
+        Split a getFullHierarchyFromTSN result into (lineage, taxon).
+
+        ITIS returns the ancestors, the taxon itself and then its direct
+        children, so the requested taxon is the entry whose TSN matches,
+        not the last entry. The lineage runs from the kingdom down to (and
+        including) the taxon; children are left out.
+
+        Returns:
+            (lineage, taxon), or ([], None) if the TSN is not in the list
+        """
+        for i, item in enumerate(hierarchy):
+            if item.tsn == tsn:
+                return hierarchy[:i + 1], item
+        return [], None
+
     def get_common_names_from_tsn(self, tsn: int) -> List[str]:
         """
         Get common names for a TSN.
@@ -340,11 +359,13 @@ class ITISClient:
                 logger.warning(f"No hierarchy found for TSN: {tsn}")
                 return None
                 
-            # The last item in hierarchy should be our target taxon
-            taxon = hierarchy[-1]
+            ancestors, taxon = self.split_lineage(hierarchy, tsn)
+            if taxon is None:
+                logger.warning(f"TSN {tsn} not in its own hierarchy")
+                return None
             
-            # Fill in hierarchical fields from complete lineage
-            for ancestor in hierarchy:
+            # Fill in hierarchical fields from the lineage (ancestors + taxon)
+            for ancestor in ancestors:
                 rank = ancestor.rank
                 if rank == 'Kingdom' and not taxon.kingdom:
                     taxon.kingdom = ancestor.scientific_name

@@ -151,9 +151,10 @@ class DataSourceManager:
                 logger.info(f"Trying {source_name}...")
                 
                 if source_name == 'ITIS':
-                    hierarchy = client.get_full_hierarchy_from_tsn(int(identifier))
-                    if hierarchy:
-                        taxon = hierarchy[-1]
+                    full = client.get_full_hierarchy_from_tsn(int(identifier))
+                    # ITIS lists the taxon's children after it: keep only the lineage
+                    hierarchy, taxon = client.split_lineage(full, int(identifier))
+                    if taxon:
                         # Get common names
                         taxon.common_names = client.get_common_names_from_tsn(int(identifier))
                         logger.info(f"✓ Retrieved from {source_name}: {taxon.scientific_name}")
