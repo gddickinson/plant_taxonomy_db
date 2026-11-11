@@ -75,8 +75,8 @@ integration, a PyQt5 GUI, and comparative visualization tools.
 
 ## Tests: `tests/`
 - **`test_db_manager.py`** -- Database CRUD smoke tests
-- **`test_offline.py`** -- Offline test suite (moved from root)
-- **`test_comparative.py`** -- Comparative viz data handling (moved from root)
+- **`test_offline.py`** -- pytest: database workflow on utils/test_data.py in a temp DB (root `test_offline.py` is the printed walk-through)
+- **`test_comparative.py`** -- pytest: species lineages as dicts on the committed DBs (root script takes any DB)
 - **`test_itis_client.py`** -- ITISClient parsing on recorded ITIS XML (`fixtures/itis/`), no network
 - **`test_itis_subset.py`** -- subtree builder helpers on recorded XML
 - **`test_web.py`** -- web API, static build, JS tests (node), search parity fixture is current
