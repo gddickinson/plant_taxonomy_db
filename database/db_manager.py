@@ -183,15 +183,17 @@ class TaxonomyDatabase:
         
         results = [dict(row) for row in self.cursor.fetchall()]
         
-        # Also search common names if we have room
+        # Also search common names if we have room, skipping taxa already
+        # found by scientific name (they would otherwise be listed twice)
         if len(results) < limit:
             self.cursor.execute("""
                 SELECT DISTINCT t.* FROM taxa t
                 JOIN common_names cn ON t.tsn = cn.tsn
                 WHERE cn.common_name LIKE ?
+                  AND t.scientific_name NOT LIKE ?
                 LIMIT ?
-            """, (f'%{search_term}%', limit - len(results)))
-            
+            """, (f'%{search_term}%', f'%{search_term}%', limit - len(results)))
+
             results.extend([dict(row) for row in self.cursor.fetchall()])
             
         return results

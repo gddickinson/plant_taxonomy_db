@@ -165,3 +165,12 @@ class TestStatistics:
 
 if __name__ == '__main__':
     pytest.main([__file__, '-v'])
+
+
+def test_search_lists_each_taxon_once(db):
+    """A taxon whose scientific AND common name match must not be returned twice."""
+    db.insert_taxon({'tsn': 18035, 'scientific_name': 'Pinus', 'rank': 'Genus', 'source': 'ITIS'})
+    db.insert_common_name(18035, 'pine')
+    db.insert_common_name(18035, 'pinyon')
+    results = db.search_by_name('pin')
+    assert [r['tsn'] for r in results] == [18035]
