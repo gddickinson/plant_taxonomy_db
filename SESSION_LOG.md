@@ -16,6 +16,8 @@
 - Web interface `web/` (FastAPI, port 8113) + static site (`scripts/build_static.py`, `.github/workflows/pages.yml`):
   home, tree, taxon pages, search (JS mirror with parity fixture), ranks, about. README section, INTERFACE.md,
   THIRD_PARTY.md.
-- Pre-existing: `tests/test_offline.py` and `tests/test_comparative.py` are scripts whose functions take arguments,
-  so pytest reports 7 collection errors for them (unchanged).
+- `tests/test_offline.py` and `tests/test_comparative.py` were copies of the root scripts whose functions take
+  arguments, so pytest reported 7 errors. Rewritten as real pytest tests (temp DB from utils/test_data.py; committed
+  DBs); the root scripts stay as runnable walk-throughs. Whole `tests/` now collects with 0 errors.
+- README roadmap: PyQt GUI for browsing marked done (taxonomy_gui.py, gui/).
 - Not pushed; the lead reviews and merges.

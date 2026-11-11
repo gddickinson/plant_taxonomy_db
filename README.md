@@ -269,7 +269,7 @@ db.close()
 - [ ] Simple CLI tool
 
 ### Phase 3 (Future)
-- [ ] PyQt GUI for browsing
+- ✅ PyQt GUI for browsing (`taxonomy_gui.py`, `gui/`; run `python launcher.py`)
 - [ ] Taxonomic tree visualization
 - [ ] Geographic distribution data
 - [ ] Image integration
